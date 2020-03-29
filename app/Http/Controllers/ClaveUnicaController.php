@@ -21,14 +21,14 @@ class ClaveUnicaController extends Controller
 
         $client = new Client([
             // Base URI is used with relative requests
-            'base_uri' => 'https://accounts.claveunica.gob.cl/openid',
+            'base_uri' => 'https://accounts.claveunica.gob.cl',
             // You can set any number of default request options.
             //'timeout'  => 2.0,
         ]);
         //$response = $client->request('GET', 'authorize');
         ///$response = $client->get('authorize');
 
-        $client->request('GET', 'authorize', [
+        $client->request('GET', 'openid/authorize', [
             'query' => [
                 'client_id' => 'a4b81d3aa23c457998312c0a980ebc4f',
                 'response_type' => 'code',
