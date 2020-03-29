@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Input;
 
 class ClaveUnicaController extends Controller
 {
@@ -49,7 +50,14 @@ class ClaveUnicaController extends Controller
     }
 
 
-    public function callback(){
-        die();
+    public function callback() {
+        //https://example.com/?code=5fb3b172913448acadce6b011af1e75e&state=abcdefgh
+        $code = Input::get('code');
+        $state = Input::get('state'); // token
+
+        echo $code;
+        echo ' - ';
+        echo $state;
+
     }
 }
