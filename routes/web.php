@@ -13,10 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-
-Route::any('/claveunica/autenticar', 'Auth\LoginController@redirectToProvider')->name('login.claveunica');
-Route::any('/claveunica/validar', 'Auth\LoginController@handleProviderCallback')->name('login.claveunica.callback');
+Route::get('/','ClaveUnicaController@autenticar')->name('login.claveunica');
+Route::get('/callback','ClaveUnicaController@callback')->name('login.callback');
+//
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+//
+//
+// Route::any('/claveunica/autenticar', 'Auth\LoginController@redirectToProvider')->name('login.claveunica');
+// Route::any('/claveunica/validar', 'Auth\LoginController@handleProviderCallback')->name('login.claveunica.callback');
