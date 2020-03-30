@@ -39,6 +39,8 @@ class ClaveUnicaController extends Controller
             ]
         ]);
 
+        dd($client);
+
         /*
         client_id: a4b81d3aa23c457998312c0a980ebc4f
         response_type: code
