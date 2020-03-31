@@ -44,9 +44,18 @@ class ClaveUnicaController extends Controller
         $state = csrf_token();
         $scope = urlencode('openid run name');
 
-        header("Location: https://accounts.claveunica.gob.cl/openid/authorize?client_id=".$client_id."&redirect_uri=".$redirect_uri."&response_type=code&scope=".$scope."&state=".$state);
-        //echo "Location: https://accounts.claveunica.gob.cl/openid/authorize?client_id=".$client_id."&redirect_uri=".$redirect_uri."&response_type=code&scope=".$scope."&state=".$state;
-        //dd($client);
+        //header("Location: https://accounts.claveunica.gob.cl/openid/authorize?client_id=".$client_id."&redirect_uri=".$redirect_uri."&response_type=code&scope=".$scope."&state=".$state);
+
+        $url = "Location: https://accounts.claveunica.gob.cl/openid/authorize?client_id=".$client_id."&redirect_uri=".$redirect_uri."&response_type=code&scope=".$scope."&state=".$state;
+
+        //Use file_get_contents to GET the URL in question.
+        $contents = file_get_contents($url);
+
+        //If $contents is not a boolean FALSE value.
+        if($contents !== false){
+            //Print out the contents.
+            echo $contents;
+        }
 
         /*
         client_id: a4b81d3aa23c457998312c0a980ebc4f
