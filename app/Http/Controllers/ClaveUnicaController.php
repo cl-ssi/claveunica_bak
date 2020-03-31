@@ -39,7 +39,10 @@ class ClaveUnicaController extends Controller
         //     ]
         // ]);
 
-        header("Location: https://accounts.claveunica.gob.cl/openid/authorize?client_id=a4b81d3aa23c457998312c0a980ebc4f&response_type=code&scope=openid%20run%20name&redirect_uri=https%3A%2F%2Fi.saludiquique.cl%2Fclaveunica%2Fcallback&state=WzkTyAiC3UPD62jZfxVpa4OVoUg0PX1W0VRAXTNv");
+        $client_id = 'a4b81d3aa23c457998312c0a980ebc4f';
+        $redirect_uri = urlencode('https://i.saludiquique.cl/claveunica/callback');
+        $state = csrf_token();
+        header("Location: https://accounts.claveunica.gob.cl/openid/authorize?client_id=".$client_id."&redirect_uri=".$redirect_uri."&response_type=code&scope=openid run name&state=".$state);
 
         //dd($client);
 
