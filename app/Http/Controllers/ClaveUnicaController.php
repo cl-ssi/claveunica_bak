@@ -20,26 +20,33 @@ class ClaveUnicaController extends Controller
         // print_r($x);
         // die($x);
 
+        // $client = new Client([
+        //     // Base URI is used with relative requests
+        //     'base_uri' => 'https://accounts.claveunica.gob.cl',
+        //     // You can set any number of default request options.
+        //     //'timeout'  => 2.0,
+        // ]);
+        // //$response = $client->request('GET', 'authorize');
+        // ///$response = $client->get('authorize');
+        //
+        // $client->request('GET', 'openid/authorize', [
+        //     'query' => [
+        //         'client_id' => 'a4b81d3aa23c457998312c0a980ebc4f',
+        //         'response_type' => 'code',
+        //         'scope' => 'openid run name',
+        //         'redirect_uri' => urlencode('https://i.saludiquique.cl/claveunica/callback'),
+        //         'state' => csrf_token()
+        //     ]
+        // ]);
+
         $client = new Client([
-            // Base URI is used with relative requests
-            'base_uri' => 'https://accounts.claveunica.gob.cl',
-            // You can set any number of default request options.
-            //'timeout'  => 2.0,
-        ]);
-        //$response = $client->request('GET', 'authorize');
-        ///$response = $client->get('authorize');
+    // Base URI is used with relative requests
+    'base_uri' => 'http://httpbin.org',
+    // You can set any number of default request options.
+    'timeout'  => 2.0,
+]);
 
-        $client->request('GET', 'openid/authorize', [
-            'query' => [
-                'client_id' => 'a4b81d3aa23c457998312c0a980ebc4f',
-                'response_type' => 'code',
-                'scope' => 'openid run name',
-                'redirect_uri' => urlencode('https://i.saludiquique.cl/claveunica/callback'),
-                'state' => csrf_token()
-            ]
-        ]);
-
-        dd($client);
+        //dd($client);
 
         /*
         client_id: a4b81d3aa23c457998312c0a980ebc4f
