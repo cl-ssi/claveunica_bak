@@ -1,13 +1,47 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
-use GuzzleHttp\Client;
-
 class ClaveUnicaController extends Controller
 {
     public function autenticar(){
+        header("Location: http://www.google.com");
+        $url_base = "https://accounts.claveunica.gob.cl/accounts/login/?next=/openid/authorize";
+        $client_id = 'a4b81d3aa23c457998312c0a980ebc4f';
+        $redirect_uri = urlencode('https://i.saludiquique.cl/claveunica/callback');
+        $state = csrf_token();
+        $scope = 'openid+run+name';
+        $url=$url_base.urlencode('?client_id='.$client_id.'&redirect_uri='.$redirect_uri.'&scope='.$scope.'&response_type=code&state='.$state);
+        die($url);
+        /*
+        Esteban: esta URL la obtuve al visitar chileatiende, clickeando en login
+
+        https://accounts.claveunica.gob.cl/accounts/login/?next=/openid/authorize%3F
+        client_id%3D66a493258641428ea9797fbe33fc8b27%26
+        redirect_uri%3Dhttps%253A%252F%252Fwww.chileatiende.gob.cl%252Flogin%252Fclaveunica%252Fcallback%26
+        scope%3Dopenid%2Brun%2Bname%2Bemail%26
+        response_type%3Dcode%26
+        state%3D3xTq6GayWkY6Er1eY4tvfMbnRWYqWOT1ibjyifr5
+
+        https://accounts.claveunica.gob.cl/accounts/login/?next=/openid/authorize%3F
+        client_id%3Da4b81d3aa23c457998312c0a980ebc4f%26
+        redirect_uri%3Dhttps%253A%252F%252Fi.saludiquique.cl%252Fclaveunica%252Fcallback%26
+        scope%3Dopenid%2Brun%2Bname%26
+        response_type%3Dcode%26
+        state%3DD2983NTMGbk4onKE27AMaYARCyqEIWQy8fhKRbPP
+
+        después de urldecode():
+
+        https://accounts.claveunica.gob.cl/accounts/login/?next=/openid/authorize?
+        client_id=66a493258641428ea9797fbe33fc8b27&
+        redirect_uri=https%3A%2F%2Fwww.chileatiende.gob.cl%2Flogin%2Fclaveunica%2Fcallback&
+        scope=openid+run+name+email&
+        response_type=code&
+        state=3xTq6GayWkY6Er1eY4tvfMbnRWYqWOT1ibjyifr5
+
+
+        redirect_uri doble encodeada, aplicada urldecode de nuevo
+        https://www.chileatiende.gob.cl/login/claveunica/callback
+        */
 
         // $x = [
         //     'client_id' => 'a4b81d3aa23c457998312c0a980ebc4f',
@@ -38,6 +72,7 @@ class ClaveUnicaController extends Controller
         //         'state' => csrf_token()
         //     ]
         // ]);
+
 
         $client_id = 'a4b81d3aa23c457998312c0a980ebc4f';
         $redirect_uri = urlencode('https://i.saludiquique.cl/claveunica/callback');
