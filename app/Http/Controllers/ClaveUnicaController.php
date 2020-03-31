@@ -6,7 +6,7 @@ class ClaveUnicaController extends Controller
     public function autenticar(){
         $url_base = "https://accounts.claveunica.gob.cl/accounts/login/?next=/openid/authorize";
         $client_id = 'a4b81d3aa23c457998312c0a980ebc4f';
-        $redirect_uri = urlencode('https://i.saludiquique.cl/claveunica/callback');
+        $redirect_uri = urlencode("https://i.saludiquique.cl/claveunica/callback");
         $state = csrf_token();
         $scope = 'openid+run+name';
         $url=$url_base.urlencode('?client_id='.$client_id.'&redirect_uri='.$redirect_uri.'&scope='.$scope.'&response_type=code&state='.$state);
