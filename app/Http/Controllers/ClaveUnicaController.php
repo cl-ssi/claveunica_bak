@@ -41,10 +41,10 @@ class ClaveUnicaController extends Controller
         ]);
 
         $array = json_decode($response, true);
+        dd($array);
 
         $url_base = "https://www.claveunica.gob.cl/openid/userinfo/";
-        $token = $array['access_token'];
-        $response = Http::withToken('token')->post($url_base);
+        $response = Http::withToken($array['access_token'])->post($url_base);
 
         dd($response);
     }
