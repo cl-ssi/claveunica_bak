@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 class ClaveUnicaController extends Controller
 {
     public function autenticar(){
@@ -22,9 +23,45 @@ class ClaveUnicaController extends Controller
         echo $code;
         echo ' - ';
         echo $state;
+
+        $url_base = "https://accounts.claveunica.gob.cl/openid/token/";
+        $client_id = '469d4d77d9f44eb3bc2555039716e1ab';
+        $client_secret = '7e2c1ce635824857a2b0bd85d13f09c4';
+        $redirect_uri = urlencode("https://i.saludiquique.cl/test/claveunica/callback");
+        $state = csrf_token();
+        $scope = 'openid+run+name';
+
+        $response = Http::asForm()->post($url_base, [
+            'client_id' => $client_id,
+            'client_secret' => $client_secret,
+            'redirect_uri' => $redirect_uri,
+            'grant_type' => 'authorization_code',
+            'code' => $code,
+            'state' => csrf_token(),
+        ]);
+
+        die($response);
     }
 
     /*
+    client_id: Este parámetro se obtiene al Activar la Institución.
+    client_secret: Este parámetro se obtiene al Activar la Institución
+    redirect_uri: En este parámetro debe ir la URI de tu aplicación (la misma del Paso 2).
+    grant_type: Este parámetro es parte de la lógica utilizada por OpenID Connect y siempre debe ser authorization_code.
+    code: En este parámetro debe ir el código de acceso obtenido en el Paso 3.
+    state: En este parámetro debe ir el mismo Token único de sesión que fue indicado en el Paso 1.
+
+    curl -i 'https://accounts.claveunica.gob.cl/openid/token/'
+    -H 'content-type: application/x-www-form-urlencoded; charset=UTF-8'
+    --data '
+    client_id=CLIENT_ID&
+    client_secret=CLIENT_SECRET&
+    redirect_uri=URI_REDIRECT_ENCODEADA&
+    grant_type=authorization_code&
+    code=CODE&
+    state=STATE'
+
+
     Esteban: esta URL la obtuve al visitar chileatiende, clickeando en login
 
     https://accounts.claveunica.gob.cl/accounts/login/?next=/openid/authorize%3F
