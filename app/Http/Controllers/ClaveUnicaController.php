@@ -42,10 +42,10 @@ class ClaveUnicaController extends Controller
         $client_id = 'a4b81d3aa23c457998312c0a980ebc4f';
         $redirect_uri = urlencode('https://i.saludiquique.cl/claveunica/callback');
         $state = csrf_token();
-        $scope = urlencode('openid 44.444.444-4 prueba');
+        $scope = urlencode('openid run name');
 
         header("Location: https://accounts.claveunica.gob.cl/openid/authorize?client_id=".$client_id."&redirect_uri=".$redirect_uri."&response_type=code&scope=".$scope."&state=".$state);
-        echo "Location: https://accounts.claveunica.gob.cl/openid/authorize?client_id=".$client_id."&redirect_uri=".$redirect_uri."&response_type=code&scope=".$scope."&state=".$state;
+        //echo "Location: https://accounts.claveunica.gob.cl/openid/authorize?client_id=".$client_id."&redirect_uri=".$redirect_uri."&response_type=code&scope=".$scope."&state=".$state;
         //dd($client);
 
         /*
