@@ -22,7 +22,7 @@ class ClaveUnicaController extends Controller
         $url_base = "https://accounts.claveunica.gob.cl/openid/token/";
         $client_id = env("CLAVEUNICA_CLIENT_ID");
         $client_secret = env("CLAVEUNICA_SECRET_ID");
-        $redirect_uri = urlencode(env("CLAVEUNICA_CALLBACK_TEST"));
+        $redirect_uri = urlencode(env("CLAVEUNICA_CALLBACK"));
         $state = csrf_token();
         $scope = 'openid+run+name+email';
 
