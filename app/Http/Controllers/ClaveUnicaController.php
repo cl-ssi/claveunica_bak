@@ -41,8 +41,12 @@ class ClaveUnicaController extends Controller
         ]);
 
         $array = json_decode($response, true);
-        echo $array['token_type'];
-        dd(json_decode($response));
+
+        $url_base = "https://www.claveunica.gob.cl/openid/userinfo/";
+        $token = $array['access_token'];
+        $response = Http::withToken('token')->post($url_base);
+
+        dd($response);
     }
 
     /*
@@ -53,7 +57,8 @@ class ClaveUnicaController extends Controller
 "refresh_token": "5472166ac1674a038af70a5505f173dc",
 "token_type": "bearer",
 "expires_in": 3600,
-"id_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6ImM1YWE4YjcyZGZjNmJhMGRiNWQyM2Q5NjEwN2MxMDZkIn0.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmNsYXZldW5pY2EuZ29iLmNsL29wZW5pZCIsInN1YiI6IjI1OTQiLCJhdWQiOiI0NjlkNGQ3N2Q5ZjQ0ZWIzYmMyNTU1MDM5NzE2ZTFhYiIsImV4cCI6MTU4NTY0OTc4NSwiaWF0IjoxNTg1NjQ5MTg1LCJhdXRoX3RpbWUiOjE1ODU2NDkxODQsImF0X2hhc2giOiJCS3cxWHB1d1VnT09mMFR1VmlLeXR3In0.j1BO7O1dO49CyNp5yxyGOLj-rIqhn9Z65dd0XCblkt3zqN-EhBxgBHtLuYBRq_JHtqEnRu-eLvbQD3qwWEQQ2y18KzRHAeXILH2T3QzBrZk5T5muCeFdk1gTkoWlOPEyj0Eshhy_dTvQ8JDlfVmCr2kmTc2Zesyimd3uUSjWEi4"}
+"id_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6ImM1YWE4YjcyZGZjNmJhMGRiNWQyM2Q5NjEwN2MxMDZkIn0.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmNsYXZldW5pY2EuZ29iLmNsL29wZW5pZCIsInN1YiI6IjI1OTQiLCJhdWQiOiI0NjlkNGQ3N2Q5ZjQ0ZWIzYmMyNTU1MDM5NzE2ZTFhYiIsImV4cCI6MTU4NTY0OTc4NSwiaWF0IjoxNTg1NjQ5MTg1LCJhdXRoX3RpbWUiOjE1ODU2NDkxODQsImF0X2hhc2giOiJCS3cxWHB1d1VnT09mMFR1VmlLeXR3In0.j1BO7O1dO49CyNp5yxyGOLj-rIqhn9Z65dd0XCblkt3zqN-EhBxgBHtLuYBRq_JHtqEnRu-eLvbQD3qwWEQQ2y18KzRHAeXILH2T3QzBrZk5T5muCeFdk1gTkoWlOPEyj0Eshhy_dTvQ8JDlfVmCr2kmTc2Zesyimd3uUSjWEi4"
+}
 
     Paso 2
 
