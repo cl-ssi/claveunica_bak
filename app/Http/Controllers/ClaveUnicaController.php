@@ -6,10 +6,10 @@ class ClaveUnicaController extends Controller
 {
     public function autenticar(){
         $url_base = "https://accounts.claveunica.gob.cl/accounts/login/?next=/openid/authorize";
-        $client_id = '469d4d77d9f44eb3bc2555039716e1ab';
-        $redirect_uri = urlencode("https://i.saludiquique.cl/test/claveunica/callback");
+        $client_id = env("CLAVEUNICA_CLIENT_ID");
+        $redirect_uri = urlencode(env("CLAVEUNICA_CALLBACK_TEST"));
         $state = csrf_token();
-        $scope = 'openid+run+name';
+        $scope = 'openid+run+name+email';
         $url=$url_base.urlencode('?client_id='.$client_id.'&redirect_uri='.$redirect_uri.'&scope='.$scope.'&response_type=code&state='.$state);
         header("Location:$url");
         die($url);
@@ -20,9 +20,9 @@ class ClaveUnicaController extends Controller
         $state = $request->input('state'); // token
 
         $url_base = "https://accounts.claveunica.gob.cl/openid/token/";
-        $client_id = '469d4d77d9f44eb3bc2555039716e1ab';
-        $client_secret = '7e2c1ce635824857a2b0bd85d13f09c4';
-        $redirect_uri = urlencode("https://i.saludiquique.cl/test/claveunica/callback");
+        $client_id = env("CLAVEUNICA_CLIENT_ID");
+        $client_id = env("CLAVEUNICA_SECRET_ID");
+        $redirect_uri = urlencode(env("CLAVEUNICA_CALLBACK_TEST"));
         $state = csrf_token();
         $scope = 'openid+run+name+email';
 
