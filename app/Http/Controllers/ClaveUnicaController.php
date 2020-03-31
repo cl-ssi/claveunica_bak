@@ -25,7 +25,7 @@ class ClaveUnicaController extends Controller
     }
 
     /*
-    Esteban: esta URL la obtuve al visitar chileatiende, clickeando en login 
+    Esteban: esta URL la obtuve al visitar chileatiende, clickeando en login
 
     https://accounts.claveunica.gob.cl/accounts/login/?next=/openid/authorize%3F
     client_id%3D66a493258641428ea9797fbe33fc8b27%26
