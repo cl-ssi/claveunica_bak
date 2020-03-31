@@ -10,8 +10,7 @@ class ClaveUnicaController extends Controller
         $state = csrf_token();
         $scope = 'openid+run+name';
         $url=$url_base.urlencode('?client_id='.$client_id.'&redirect_uri='.$redirect_uri.'&scope='.$scope.'&response_type=code&state='.$state);
-        header("Location: http://www.google.com");
-        die();
+        header("Location: $url");
     }
 
     public function callback(Request $request) {
