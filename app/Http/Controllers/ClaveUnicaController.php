@@ -16,13 +16,8 @@ class ClaveUnicaController extends Controller
     }
 
     public function callback(Request $request) {
-        //https://example.com/?code=5fb3b172913448acadce6b011af1e75e&state=abcdefgh
         $code = $request->input('code');
         $state = $request->input('state'); // token
-        //
-        // echo $code;
-        // echo ' - ';
-        // echo $state;
 
         $url_base = "https://accounts.claveunica.gob.cl/openid/token/";
         $client_id = '469d4d77d9f44eb3bc2555039716e1ab';
@@ -41,26 +36,27 @@ class ClaveUnicaController extends Controller
         ]);
 
         $array = json_decode($response, true);
-        //dd($array);
 
         $url_base = "https://www.claveunica.gob.cl/openid/userinfo/";
         $response = Http::withToken($array['access_token'])->post($url_base);
-	
-	echo '<pre>';
-	print_r($response->json());
-	echo '</pre>';
+
+        echo '<pre>';
+        print_r($response->json());
+        echo '</pre>';
     }
 
     /*
     Paso 3
+
     curl -i 'https://www.claveunica.gob.cl/openid/userinfo/' -X POST -H 'authorization: Bearer TOKEN'
-{
-"access_token": "05455fc179dc42de8d412eade36d7d55",
-"refresh_token": "5472166ac1674a038af70a5505f173dc",
-"token_type": "bearer",
-"expires_in": 3600,
-"id_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6ImM1YWE4YjcyZGZjNmJhMGRiNWQyM2Q5NjEwN2MxMDZkIn0.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmNsYXZldW5pY2EuZ29iLmNsL29wZW5pZCIsInN1YiI6IjI1OTQiLCJhdWQiOiI0NjlkNGQ3N2Q5ZjQ0ZWIzYmMyNTU1MDM5NzE2ZTFhYiIsImV4cCI6MTU4NTY0OTc4NSwiaWF0IjoxNTg1NjQ5MTg1LCJhdXRoX3RpbWUiOjE1ODU2NDkxODQsImF0X2hhc2giOiJCS3cxWHB1d1VnT09mMFR1VmlLeXR3In0.j1BO7O1dO49CyNp5yxyGOLj-rIqhn9Z65dd0XCblkt3zqN-EhBxgBHtLuYBRq_JHtqEnRu-eLvbQD3qwWEQQ2y18KzRHAeXILH2T3QzBrZk5T5muCeFdk1gTkoWlOPEyj0Eshhy_dTvQ8JDlfVmCr2kmTc2Zesyimd3uUSjWEi4"
-}
+    {
+    "access_token": "05455fc179dc42de8d412eade36d7d55",
+    "refresh_token": "5472166ac1674a038af70a5505f173dc",
+    "token_type": "bearer",
+    "expires_in": 3600,
+    "id_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6ImM1YWE4YjcyZGZjNmJhMGRiNWQyM2Q5NjEwN2MxMDZkIn0.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmNsYXZldW5pY2EuZ29iLmNsL29wZW5pZCIsInN1YiI6IjI1OTQiLCJhdWQiOiI0NjlkNGQ3N2Q5ZjQ0ZWIzYmMyNTU1MDM5NzE2ZTFhYiIsImV4cCI6MTU4NTY0OTc4NSwiaWF0IjoxNTg1NjQ5MTg1LCJhdXRoX3RpbWUiOjE1ODU2NDkxODQsImF0X2hhc2giOiJCS3cxWHB1d1VnT09mMFR1VmlLeXR3In0.j1BO7O1dO49CyNp5yxyGOLj-rIqhn9Z65dd0XCblkt3zqN-EhBxgBHtLuYBRq_JHtqEnRu-eLvbQD3qwWEQQ2y18KzRHAeXILH2T3QzBrZk5T5muCeFdk1gTkoWlOPEyj0Eshhy_dTvQ8JDlfVmCr2kmTc2Zesyimd3uUSjWEi4"
+    }
+
 
     Paso 2
 
@@ -111,74 +107,4 @@ class ClaveUnicaController extends Controller
     redirect_uri doble encodeada, aplicada urldecode de nuevo
     https://www.chileatiende.gob.cl/login/claveunica/callback
     */
-
-    // $x = [
-    //     'client_id' => 'a4b81d3aa23c457998312c0a980ebc4f',
-    //     'response_type' => 'code',
-    //     'scope' => 'openid run name',
-    //     'redirect_uri' => urlencode('https://i.saludiquique.cl/claveunica/callback'),
-    //     'state' => csrf_token()
-    // ];
-    // https://accounts.claveunica.gob.cl/openid/authorize?client_id=a4b81d3aa23c457998312c0a980ebc4f&response_type=code&scope=openid%20run%20name&redirect_uri=https%3A%2F%2Fi.saludiquique.cl%2Fclaveunica%2Fcallback&state=WzkTyAiC3UPD62jZfxVpa4OVoUg0PX1W0VRAXTNv
-    // print_r($x);
-    // die($x);
-
-    // $client = new Client([
-    //     // Base URI is used with relative requests
-    //     'base_uri' => 'https://accounts.claveunica.gob.cl',
-    //     // You can set any number of default request options.
-    //     //'timeout'  => 2.0,
-    // ]);
-    // //$response = $client->request('GET', 'authorize');
-    // ///$response = $client->get('authorize');
-    //
-    // $client->request('GET', 'openid/authorize', [
-    //     'query' => [
-    //         'client_id' => 'a4b81d3aa23c457998312c0a980ebc4f',
-    //         'response_type' => 'code',
-    //         'scope' => 'openid run name',
-    //         'redirect_uri' => urlencode('https://i.saludiquique.cl/claveunica/callback'),
-    //         'state' => csrf_token()
-    //     ]
-    // ]);
-    //
-    //
-    // $client_id = 'a4b81d3aa23c457998312c0a980ebc4f';
-    // $redirect_uri = urlencode('https://i.saludiquique.cl/claveunica/callback');
-    // $state = csrf_token();
-    // $scope = 'openid run name';
-    //
-    // //header("Location: https://accounts.claveunica.gob.cl/openid/authorize?client_id=".$client_id."&redirect_uri=".$redirect_uri."&response_type=code&scope=".$scope."&state=".$state);
-    //
-    // $url = "Location: https://accounts.claveunica.gob.cl/openid/authorize?client_id=".$client_id."&redirect_uri=".$redirect_uri."&response_type=code&scope=".$scope."&state=".$state;
-    //
-    // $ch = curl_init();
-    //
-    // //Set the URL that you want to GET by using the CURLOPT_URL option.
-    // curl_setopt($ch, CURLOPT_URL, $url);
-    //
-    // //Set CURLOPT_RETURNTRANSFER so that the content is returned as a variable.
-    // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    //
-    // //Set CURLOPT_FOLLOWLOCATION to true to follow redirects.
-    // curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-    //
-    // //Execute the request.
-    // $data = curl_exec($ch);
-    //
-    // //Close the cURL handle.
-    // curl_close($ch);
-    //
-    // //Print the data out onto the page.
-    // echo $data;
-
-    /*
-    client_id: a4b81d3aa23c457998312c0a980ebc4f
-    response_type: code
-    scope: openid run name
-    redirect_uri: https://i.saludiquique.cl/claveunica/callback
-    state: csrf_token()
-    URI: https://accounts.claveunica.gob.cl/openid/authorize?client_id=123&redirect_uri=https%3A%2F%2Fexample.com&response_type=code&scope=openid run name&state=abcdefgh
-    */
-
 }
