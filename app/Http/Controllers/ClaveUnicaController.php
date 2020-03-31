@@ -11,6 +11,7 @@ class ClaveUnicaController extends Controller
         $scope = 'openid+run+name';
         $url=$url_base.urlencode('?client_id='.$client_id.'&redirect_uri='.$redirect_uri.'&scope='.$scope.'&response_type=code&state='.$state);
         header("Location:$url");
+        die($url);
     }
 
     public function callback(Request $request) {
