@@ -39,12 +39,7 @@ class ClaveUnicaController extends Controller
         //     ]
         // ]);
 
-        $client = new Client([
-    // Base URI is used with relative requests
-    'base_uri' => 'http://httpbin.org',
-    // You can set any number of default request options.
-    'timeout'  => 2.0,
-]);
+        header("Location: https://accounts.claveunica.gob.cl/openid/authorize?client_id=a4b81d3aa23c457998312c0a980ebc4f&response_type=code&scope=openid%20run%20name&redirect_uri=https%3A%2F%2Fi.saludiquique.cl%2Fclaveunica%2Fcallback&state=WzkTyAiC3UPD62jZfxVpa4OVoUg0PX1W0VRAXTNv");
 
         //dd($client);
 
