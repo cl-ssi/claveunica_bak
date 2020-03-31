@@ -19,10 +19,10 @@ class ClaveUnicaController extends Controller
         //https://example.com/?code=5fb3b172913448acadce6b011af1e75e&state=abcdefgh
         $code = $request->input('code');
         $state = $request->input('state'); // token
-
-        echo $code;
-        echo ' - ';
-        echo $state;
+        //
+        // echo $code;
+        // echo ' - ';
+        // echo $state;
 
         $url_base = "https://accounts.claveunica.gob.cl/openid/token/";
         $client_id = '469d4d77d9f44eb3bc2555039716e1ab';
@@ -40,10 +40,23 @@ class ClaveUnicaController extends Controller
             'state' => csrf_token(),
         ]);
 
-        die($response);
+        $array = json_decode($response, true);
+        echo $array['token_type'];
+        dd(json_decode($response));
     }
 
     /*
+    Paso 3
+    curl -i 'https://www.claveunica.gob.cl/openid/userinfo/' -X POST -H 'authorization: Bearer TOKEN'
+{
+"access_token": "05455fc179dc42de8d412eade36d7d55",
+"refresh_token": "5472166ac1674a038af70a5505f173dc",
+"token_type": "bearer",
+"expires_in": 3600,
+"id_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6ImM1YWE4YjcyZGZjNmJhMGRiNWQyM2Q5NjEwN2MxMDZkIn0.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmNsYXZldW5pY2EuZ29iLmNsL29wZW5pZCIsInN1YiI6IjI1OTQiLCJhdWQiOiI0NjlkNGQ3N2Q5ZjQ0ZWIzYmMyNTU1MDM5NzE2ZTFhYiIsImV4cCI6MTU4NTY0OTc4NSwiaWF0IjoxNTg1NjQ5MTg1LCJhdXRoX3RpbWUiOjE1ODU2NDkxODQsImF0X2hhc2giOiJCS3cxWHB1d1VnT09mMFR1VmlLeXR3In0.j1BO7O1dO49CyNp5yxyGOLj-rIqhn9Z65dd0XCblkt3zqN-EhBxgBHtLuYBRq_JHtqEnRu-eLvbQD3qwWEQQ2y18KzRHAeXILH2T3QzBrZk5T5muCeFdk1gTkoWlOPEyj0Eshhy_dTvQ8JDlfVmCr2kmTc2Zesyimd3uUSjWEi4"}
+
+    Paso 2
+
     client_id: Este parámetro se obtiene al Activar la Institución.
     client_secret: Este parámetro se obtiene al Activar la Institución
     redirect_uri: En este parámetro debe ir la URI de tu aplicación (la misma del Paso 2).
@@ -62,7 +75,7 @@ class ClaveUnicaController extends Controller
     state=STATE'
 
 
-    Esteban: esta URL la obtuve al visitar chileatiende, clickeando en login
+    Paso 1
 
     https://accounts.claveunica.gob.cl/accounts/login/?next=/openid/authorize%3F
     client_id%3D66a493258641428ea9797fbe33fc8b27%26
