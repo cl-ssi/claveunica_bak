@@ -29,7 +29,7 @@ class ClaveUnicaController extends Controller
         $client_secret = '7e2c1ce635824857a2b0bd85d13f09c4';
         $redirect_uri = urlencode("https://i.saludiquique.cl/test/claveunica/callback");
         $state = csrf_token();
-        $scope = 'openid+run+name';
+        $scope = 'openid+run+name+email';
 
         $response = Http::asForm()->post($url_base, [
             'client_id' => $client_id,
@@ -41,12 +41,14 @@ class ClaveUnicaController extends Controller
         ]);
 
         $array = json_decode($response, true);
-        dd($array);
+        //dd($array);
 
         $url_base = "https://www.claveunica.gob.cl/openid/userinfo/";
         $response = Http::withToken($array['access_token'])->post($url_base);
-
-        dd($response);
+	
+	echo '<pre>';
+	print_r($response->json());
+	echo '</pre>';
     }
 
     /*
