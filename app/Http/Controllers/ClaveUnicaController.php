@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use App\User;
 class ClaveUnicaController extends Controller
 {
     public function autenticar(){
@@ -35,14 +36,13 @@ class ClaveUnicaController extends Controller
             'state' => csrf_token(),
         ]);
 
-        $array = json_decode($response, true);
-
-
         $url_base = "https://www.claveunica.gob.cl/openid/userinfo/";
-        $response = Http::withToken($array['access_token'])->post($url_base);
+        $response = Http::withToken(json_decode($response)->access_token)->post($url_base);
+
+	$user_cu = json_decode($response);
 
         echo '<pre>';
-        print_r($response->json());
+	print_r($user_cu);
         echo '</pre>';
     }
 
