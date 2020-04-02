@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/login','ClaveUnicaController@login')->name('login');
 Route::get('/','ClaveUnicaController@autenticar')->name('login.claveunica');
 Route::get('/callback','ClaveUnicaController@callback')->name('login.callback');
 //

@@ -46,4 +46,7 @@ class ClaveUnicaController extends Controller
         echo '</pre>';
     }
 
+    public function login() {
+        return view('welcome');
+    }
 }

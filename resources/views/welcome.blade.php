@@ -64,14 +64,6 @@
         </style>
     </head>
     <body>
-        <form method="post" role="form" action="/oauth">
-            <div class="form-group">
-                <img src="https://www.claveunica.gob.cl/assets/img/logo.png">
-            </div>
-            <h2 class="form-signin-heading">Por favor, ingrese con su cuenta de ClaveUnica</h2>
-            <input type="submit" class="btn btn-lg btn-primary btn-block" value="Siguiente">
-        </form>
-
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
@@ -89,7 +81,10 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Laravel <br>
+                    <a href="{{ route('login.claveunica') }}">
+                        <img src="https://digital.gob.cl/images/logo-claveunica.svg" width="200" alt="Logo Clave única">
+                    </a>
                 </div>
 
                 <div class="links">
