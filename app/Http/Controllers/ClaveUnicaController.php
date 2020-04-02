@@ -7,7 +7,7 @@ class ClaveUnicaController extends Controller
     public function autenticar(){
         $url_base = "https://accounts.claveunica.gob.cl/accounts/login/?next=/openid/authorize";
         $client_id = env("CLAVEUNICA_CLIENT_ID");
-        $redirect_uri = urlencode(env("CLAVEUNICA_CALLBACK_TEST"));
+        $redirect_uri = urlencode(env("CLAVEUNICA_CALLBACK"));
         $state = csrf_token();
         $scope = 'openid+run+name+email';
         $url=$url_base.urlencode('?client_id='.$client_id.'&redirect_uri='.$redirect_uri.'&scope='.$scope.'&response_type=code&state='.$state);
